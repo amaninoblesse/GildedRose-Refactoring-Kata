@@ -1,80 +1,15 @@
 # -*- coding: utf-8 -*-
+from item_factory import create_item
 
 class GildedRose(object):
 
     def __init__(self, items):
-        self.items = items
+        # Convert each item to its corresponding class
+        self.items = [create_item(i) for i in items]
 
     def update_quality(self):
         for item in self.items:
-            # --------------------------
-            # Aged Brie
-            # --------------------------
-            if item.name == "Aged Brie":
-                item.increase_quality()
-                item.decrease_sell_in()
-                if item.sell_in < 0:    
-                    item.increase_quality()
-    
-            # --------------------------
-            # Backstage Passes
-            # --------------------------           
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                item.increase_quality()
-                if item.sell_in < 11:
-                    item.increase_quality()
-                if item.sell_in < 6:
-                    item.increase_quality()
-                item.decrease_sell_in()
-                if item.sell_in < 0:
-                    item.quality = 0
-
-            # --------------------------
-            # Sulfuras
-            # --------------------------            
-            elif item.name == "Sulfuras, Hand of Ragnaros":
-                # Nothing to do for Sulfuras
-                pass
-
-            # --------------------------
-            # Normal items
-            # --------------------------
-            else:
-                item.decrease_quality()
-                item.decrease_sell_in()
-                if item.sell_in < 0:
-                    item.decrease_quality()
-
-    def update_quality(self):
-        for item in self.items:
-            if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
-                if item.quality > 0:
-                    if item.name != "Sulfuras, Hand of Ragnaros":
-                        item.decrease_quality()
-            else:
-                if item.quality < 50:
-                    item.increase_quality()
-                    if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                        if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.increase_quality()
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.increase_quality()
-            if item.name != "Sulfuras, Hand of Ragnaros":
-                item.sell_in = item.sell_in - 1
-            if item.sell_in < 0:
-                if item.name != "Aged Brie":
-                    if item.name != "Backstage passes to a TAFKAL80ETC concert":
-                        if item.quality > 0:
-                            if item.name != "Sulfuras, Hand of Ragnaros":
-                                item.decrease_quality()
-                    else:
-                        item.quality = item.quality - item.quality
-                else:
-                    if item.quality < 50:
-                        item.increase_quality()
-
+            item.update()
 
 class Item:
     def __init__(self, name, sell_in, quality):
