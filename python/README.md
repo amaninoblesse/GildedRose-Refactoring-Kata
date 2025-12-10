@@ -36,15 +36,16 @@ All behavior after refactoring is verified to be identical to the original imple
 ---
 
 ## Final Architecture
+```
 python/
-├─ gilded_rose.py # Orchestrator; delegates logic to specialized classes
-├─ item_classes.py # Contains BaseItem + AgedBrie, BackstagePass, Sulfuras, NormalItem
-├─ item_factory.py # Maps Items to their corresponding logic classes
-├─ tests/
-│ ├─ test_gilded_rose.py
-│ ├─ test_gilded_rose_approvals.py
-│ └─ approved_files/
-
+├─ gilded_rose.py          # Orchestrator; delegates logic to specialized classes
+├─ item_classes.py         # Contains BaseItem + AgedBrie, BackstagePass, Sulfuras, NormalItem
+├─ item_factory.py         # Maps Items to their corresponding logic classes
+└─ tests/
+   ├─ test_gilded_rose.py
+   ├─ test_gilded_rose_approvals.py
+   └─ approved_files/
+```
 
 ---
 
