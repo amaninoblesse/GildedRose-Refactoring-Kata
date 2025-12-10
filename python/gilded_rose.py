@@ -41,6 +41,9 @@ class GildedRose(object):
             # --------------------------
             else:
                 item.decrease_quality()
+                item.decrease_sell_in()
+                if item.sell_in < 0:
+                    item.decrease_quality()
 
     def update_quality(self):
         for item in self.items:
